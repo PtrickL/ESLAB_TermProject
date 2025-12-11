@@ -1,0 +1,10 @@
+../BlueNRG_MS/App/gatt_db.c:85:12:Add_Custom_Service	5
+../BlueNRG_MS/App/gatt_db.c:152:12:Update_Char1	1
+../BlueNRG_MS/App/gatt_db.c:157:12:Update_Char2	1
+../BlueNRG_MS/App/gatt_db.c:162:12:Update_Char3	1
+../BlueNRG_MS/App/gatt_db.c:172:12:Add_HWServW2ST_Service	4
+../BlueNRG_MS/App/gatt_db.c:219:12:Add_SWServW2ST_Service	3
+../BlueNRG_MS/App/gatt_db.c:258:12:Acc_Update	2
+../BlueNRG_MS/App/gatt_db.c:292:12:Quat_Update	2
+../BlueNRG_MS/App/gatt_db.c:343:6:Read_Request_CB	5
+../BlueNRG_MS/App/gatt_db.c:369:12:BlueMS_Environmental_Update	2
