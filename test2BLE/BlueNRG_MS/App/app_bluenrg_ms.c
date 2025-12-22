@@ -286,34 +286,34 @@ static void User_Process(void)
 #endif
     BSP_LED_Toggle(LED2);
 
-    if (connected)
-    {
-      /* Set a random seed */
-    	if (door_state_global != last_state)
-    	          	    {
-    	          	        last_state = door_state_global;
+    if(connected){
+      static uint32_t last_update_tick = 0;
+      if (HAL_GetTick() - last_update_tick >= 1000){
+        last_update_tick = HAL_GetTick();
+        /* Set a random seed */
+        if(door_state_global != last_state){
+	  last_state = door_state_global;
 
-    	          	        float notify_value = (float)door_state_global;
+	  float notify_value = (float)door_state_global;
 
-    	          	        // 這裡通知藍牙 characteristic
-    	          	        Update_Char1(notify_value);
+	  // 這裡通知藍牙 characteristic
+	  Update_Char1(notify_value);
+        }
+        if(event_knock_detected){
+	  float notify_value2 = 0x01;
+	  Update_Char2(notify_value2);
+	  event_knock_detected = 0;
+        }
+        if(event_handle_twist){
+	  float notify_value3 = 0x01;
+	  Update_Char3(notify_value3);
+	  event_handle_twist = 0;
+        }
+      }
 
-    	          	    }
-    	              if(event_knock_detected){
-    	              	float notify_value2 = 0x01;
-    	              Update_Char2(notify_value2);
-    	              event_knock_detected = 0;
-
-    	              }
-    	              if(event_handle_twist){
-    	                      	float notify_value3 = 0x01;
-    	                      Update_Char3(notify_value3);
-    	                      event_handle_twist = 0;
-
-    	                      }
-#if !USE_BUTTON
-      HAL_Delay(1000); /* wait 1 sec before sending new data */
-#endif
+//#if !USE_BUTTON
+//      osDelay(1000); /* wait 1 sec before sending new data */
+//#endif
     }
 #if USE_BUTTON
     /* Reset the User Button flag */

@@ -968,4 +968,3 @@ void SENSOR_IO_Delay(uint32_t Delay)
 /**
  * @}
  */
-

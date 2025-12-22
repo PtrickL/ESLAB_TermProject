@@ -11,10 +11,12 @@ CHAR3_UUID    = "aabbccdd-eeff-1122-3344-556600000004"  # handle twist
 
 # ======== Door State Mapping ========
 DOOR_STATE_TEXT = {
-    0: " 門已關閉 (CLOSED)",
-    1: " 正在開門 (OPENING)",
-    2: " 門已開啟 (OPEN)",
-    3: " 正在關門 (CLOSING)",
+    0: "門已關閉 (CLOSED)",
+    1: "正在開門 (OPENING)",
+    2: "門已開啟 (OPEN)",
+    3: "正在關門 (CLOSING)",
+    4: "敲門聲音 (KNOCK)",
+    5: "交談聲音 (SPEECH)",
 }
 
 
@@ -23,9 +25,9 @@ def handler_char1(sender, data):
     # float -> door_state
     value = struct.unpack("<f", data)[0]
     state = int(value)
-
-    text = DOOR_STATE_TEXT.get(state, f"未知狀態 {state}")
-    print(f"[CHAR1] Door State = {state} → {text}")
+    if value <= 5:
+        text = DOOR_STATE_TEXT.get(state, f"未知狀態 {state}")
+        print(f" [CHAR1] Door State = {state} → {text}")
 
 
 def handler_char2(sender, data):
@@ -43,7 +45,7 @@ def handler_char3(sender, data):
     if value == 1:
         print(" [CHAR3] 門把旋轉事件偵測到！")
     else:
-        print(f"[CHAR3] 未知旋轉資料: {value}")
+        print(f" [CHAR3] 未知旋轉資料: {value}")
 
 
 # ---------- BLE Scan ----------
